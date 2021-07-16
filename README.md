@@ -1,2 +1,2 @@
 # GO
-Stop and go.
+Touch and roll.
