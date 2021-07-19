@@ -1,16 +1,19 @@
+/*
+@author:	Zimon Kuhs
+@date:		2021-07-16
+*/
+
 package euler
 
 import (
-	"errors"
 	"fmt"
 )
 
-func Solve(number int) {
+func Solve(number int) (string, error) {
 	switch number {
-	case 12:
-		return euler12.Solve()
+	case 1:
+		return euler1()
 	default:
-		return -1, errors.New(fmt.Sprintf("Problem %d either doesn't exist or isn't implemented yet,", number))
+		return "", fmt.Errorf("problem %d either doesn't exist or isn't implemented yet,", number)
 	}
-	return -1
 }

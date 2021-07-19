@@ -1,9 +1,12 @@
+//
+// @author:	Zimon Kuhs
+// @date:   2021-07-16
+//
+
 module zimon.kuhs
 
-replace utility => ./utility
+replace zimon.kuhs/euler => ./euler
 
-replace euler => ./euler
+replace zimon.kuhs/utility => ./utility
 
 go 1.16
-
-require utility v0.0.0-00010101000000-000000000000

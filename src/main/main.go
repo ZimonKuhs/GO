@@ -1,10 +1,22 @@
+/*
+@author:	Zimon Kuhs
+@date:		2021-07-16
+*/
+
 package main
 
 import (
-	"euler"
 	"fmt"
+
+	"euler"
 )
 
 func main() {
-	fmt.Printf("%d", euler.Solve(12))
+	result, err := euler.Solve(1)
+
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
 }
