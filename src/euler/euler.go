@@ -9,10 +9,10 @@ import (
 	"fmt"
 )
 
-func Solve(number int) (string, error) {
+func Solve(number int, args ...string) (string, error) {
 	switch number {
 	case 1:
-		return euler1()
+		return euler1(args...)
 	default:
 		return "", fmt.Errorf("problem %d either doesn't exist or isn't implemented yet,", number)
 	}
