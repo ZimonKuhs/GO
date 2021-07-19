@@ -1,10 +1,10 @@
 package main
 
 import (
+	"euler"
 	"fmt"
-	"utility"
 )
 
 func main() {
-	fmt.Printf("%s", utility.Reverse("Hello, world!"))
+	fmt.Printf("%d", euler.Solve(12))
 }
