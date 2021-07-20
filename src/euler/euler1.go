@@ -14,14 +14,9 @@ package euler
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 )
-
-/*
-	I have a better idea! Start filling a list with 3^x until product exceeds ceiling. Add together.
-	Then use same list, walking backwards replacing 3s with 5s, adding product if under ceiling.
-	If product is above, pop a 3 from the start and keep going.
-*/
 
 func euler1(args ...string) (string, error) {
 	if len(args) != 1 {
@@ -38,40 +33,56 @@ func euler1(args ...string) (string, error) {
 	return solve(number)
 }
 
+/*
+	Uses the sieve of erathe-atchoo.
+	TODO: Move to "MATH"
+*/
+func compositePrimes(ceiling int) []int {
+	primes := []int{}
+	result := map[int]bool{}
+
+	if ceiling < 2 {
+		return primes
+	}
+
+	for i := 2; i < int(math.Sqrt(float64(ceiling))); i++ {
+
+		// If map has key the composite number has already been marked.
+		if _, ok := result[i]; ok {
+			continue
+		}
+
+		primes = append(primes, i)
+		result[i] = true
+
+		for j := i; j < ceiling; j++ {
+			result[j] = false
+			j *= i
+		}
+	}
+
+	return primes
+}
+
+/*
+int np, prime[N];
+bool isp[N];
+void sieve(int N) {
+    memset(isp, true, sizeof isp);
+    isp[0] = isp[1] = false;
+    for(int i=2; i<N; i++) if(isp[i]) {
+        prime[++np]=i;
+        for(int j=2*i; j<N; j+=i) {
+            isp[j]=false;
+        }
+    }
+}
+*/
+
 func solve(ceiling int64) (string, error) {
 	factors := []int64{}
 	numbers := []int64{}
 	product := int64(1)
-
-	for product < ceiling {
-		product *= 3
-		factors = append(factors, 3)
-		numbers = append(numbers, product)
-	}
-
-	pointer := len(factors) - 1
-	for factors[0] != 5 {
-		fmt.Sprintf("%s", factors)
-		println(pointer)
-		println()
-		if product < ceiling {
-			numbers = append(numbers, product)
-			factors[pointer] = 5
-			pointer--
-
-			// *= (5 / 3); leads to float logic?
-			product = product * 5 / 3
-		} else {
-			factors = factors[1:pointer]
-			product /= 3
-			pointer--
-		}
-	}
-
-	sum := int64(0)
-	for _, result := range numbers {
-		sum += result
-	}
 
 	return fmt.Sprint(sum), nil
 }
