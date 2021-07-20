@@ -34,18 +34,13 @@ func euler1(args ...string) (string, error) {
 }
 
 func multiples(ceiling int, numbers ...int) map[int][]int {
-	fmt.Printf("RECEIVED: %v", numbers)
 	results := make(map[int][]int)
 
 	for _, number := range numbers {
-		fmt.Printf("Checking for number %d.", number)
 		list := []int{}
 
-		product := number
-		for i := 1; product < ceiling; i++ {
-			fmt.Printf("%d:\tProduct: %d.\n", i, product)
-			product = i * number
-			list = append(list, product)
+		for i := 1; i*number < ceiling; i++ {
+			list = append(list, i*number)
 		}
 
 		results[number] = list
