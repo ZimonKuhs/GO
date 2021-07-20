@@ -1,15 +1,14 @@
 /*
-@author:	Zimon Kuhs
-@date:		2021-07-16
+	@author:	Zimon Kuhs
+	@date:		2021-07-16
 */
 
 package main
 
 import (
+	"euler"
 	"fmt"
 	"os"
-
-	"euler"
 )
 
 func main() {

@@ -22,6 +22,24 @@ func NewIntegerSet() IntegerSet {
 	}
 }
 
+func (set *IntegerSet) Sum() int {
+	result := 0
+	for key := range set.set {
+		result += key
+	}
+	return result
+}
+
+func (set *IntegerSet) Values() []int {
+	list := []int{}
+
+	for key := range set.set {
+		list = append(list, key)
+	}
+
+	return list
+}
+
 func (set *IntegerSet) Add(number int) bool {
 	if _, found := set.set[number]; found {
 		return false

@@ -15,10 +15,11 @@ package euler
 import (
 	"fmt"
 	"strconv"
+	"utility"
 )
 
 func euler1(args ...string) (string, error) {
-	if len(args) != 1 {
+	if len(args) < 1 {
 		return "", fmt.Errorf("expected one single numeric argument. Got %s", args)
 	}
 	number, err := strconv.ParseInt(args[0], 10, 64)
@@ -29,10 +30,38 @@ func euler1(args ...string) (string, error) {
 		return "", fmt.Errorf("expected input to be a positive integer. Got %d", number)
 	}
 
-	return solve(number)
+	return solve(int(number), 3, 5)
 }
 
-func solve(ceiling int64) (string, error) {
+func multiples(ceiling int, numbers ...int) map[int][]int {
+	fmt.Printf("RECEIVED: %v", numbers)
+	results := make(map[int][]int)
 
-	return "Not yet implemented.", nil
+	for _, number := range numbers {
+		fmt.Printf("Checking for number %d.", number)
+		list := []int{}
+
+		product := number
+		for i := 1; product < ceiling; i++ {
+			fmt.Printf("%d:\tProduct: %d.\n", i, product)
+			product = i * number
+			list = append(list, product)
+		}
+
+		results[number] = list
+	}
+
+	return results
+}
+
+func solve(ceiling int, numbers ...int) (string, error) {
+
+	set := utility.NewIntegerSet()
+	for _, list := range multiples(ceiling, numbers...) {
+		for _, value := range list {
+			set.Add(value)
+		}
+	}
+
+	return fmt.Sprint(set.Sum()), nil
 }
